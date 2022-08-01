@@ -15,8 +15,8 @@
 
 // eslint-disable-next-line
 import css from "./index.css";
-import ToolboxIcon from './svg/toolbox.svg';
-import ajax from '@codexteam/ajax';
+import ToolboxIcon from "./svg/toolbox.svg";
+import ajax from "@codexteam/ajax";
 // eslint-disable-next-line
 import polyfill from "url-polyfill";
 
@@ -49,7 +49,7 @@ export default class ButtonTool {
   static get toolbox() {
     return {
       icon: ToolboxIcon,
-      title: 'ButtonLink',
+      title: "ButtonLink",
     };
   }
 
@@ -77,9 +77,11 @@ export default class ButtonTool {
      * Tool's initial config
      */
     this.config = {
-      endpoint: config.endpoint || '',
+      endpoint: config.endpoint || "",
       headers: config.headers || {},
     };
+
+    console.log("Working!");
 
     this.nodes = {
       wrapper: null,
@@ -95,7 +97,7 @@ export default class ButtonTool {
     };
 
     this._data = {
-      link: '',
+      link: "",
       meta: {},
     };
 
@@ -110,8 +112,8 @@ export default class ButtonTool {
    * @returns {HTMLDivElement}
    */
   render() {
-    this.nodes.wrapper = this.make('div', this.CSS.baseClass);
-    this.nodes.container = this.make('div', this.CSS.container);
+    this.nodes.wrapper = this.make("div", this.CSS.baseClass);
+    this.nodes.container = this.make("div", this.CSS.container);
 
     this.nodes.inputHolder = this.makeInputHolder();
     this.nodes.linkContent = this.prepareLinkPreview();
@@ -151,7 +153,7 @@ export default class ButtonTool {
    * @returns {boolean} false if saved data is incorrect, otherwise true
    */
   validate() {
-    return this.data.link.trim() !== '';
+    return this.data.link.trim() !== "";
   }
 
   /**
@@ -189,19 +191,19 @@ export default class ButtonTool {
       /**
        * Tool's classes
        */
-      container: 'button-tool',
-      inputEl: 'button-tool__input',
-      inputHolder: 'button-tool__input-holder',
-      inputError: 'button-tool__input-holder--error',
-      linkContent: 'button-tool__content',
-      linkContentRendered: 'button-tool__content--rendered',
-      linkImage: 'button-tool__image',
-      linkTitle: 'button-tool__title',
-      linkDescription: 'button-tool__description',
-      linkText: 'button-tool__anchor',
-      progress: 'button-tool__progress',
-      progressLoading: 'button-tool__progress--loading',
-      progressLoaded: 'button-tool__progress--loaded',
+      container: "button-tool",
+      inputEl: "button-tool__input",
+      inputHolder: "button-tool__input-holder",
+      inputError: "button-tool__input-holder--error",
+      linkContent: "button-tool__content",
+      linkContentRendered: "button-tool__content--rendered",
+      linkImage: "button-tool__image",
+      linkTitle: "button-tool__title",
+      linkDescription: "button-tool__description",
+      linkText: "button-tool__anchor",
+      progress: "button-tool__progress",
+      progressLoading: "button-tool__progress--loading",
+      progressLoaded: "button-tool__progress--loaded",
     };
   }
 
@@ -211,21 +213,21 @@ export default class ButtonTool {
    * @returns {HTMLElement}
    */
   makeInputHolder() {
-    const inputHolder = this.make('div', this.CSS.inputHolder);
+    const inputHolder = this.make("div", this.CSS.inputHolder);
 
-    this.nodes.progress = this.make('label', this.CSS.progress);
-    this.nodes.input = this.make('div', [this.CSS.input, this.CSS.inputEl], {
+    this.nodes.progress = this.make("label", this.CSS.progress);
+    this.nodes.input = this.make("div", [this.CSS.input, this.CSS.inputEl], {
       contentEditable: !this.readOnly,
     });
 
-    this.nodes.input.dataset.placeholder = this.api.i18n.t('Link');
+    this.nodes.input.dataset.placeholder = this.api.i18n.t("Link");
 
     if (!this.readOnly) {
-      this.nodes.input.addEventListener('paste', (event) => {
+      this.nodes.input.addEventListener("paste", (event) => {
         this.startFetching(event);
       });
 
-      this.nodes.input.addEventListener('keydown', (event) => {
+      this.nodes.input.addEventListener("keydown", (event) => {
         const [ENTER, A] = [13, 65];
         const cmdPressed = event.ctrlKey || event.metaKey;
 
@@ -259,8 +261,8 @@ export default class ButtonTool {
   startFetching(event) {
     let url = this.nodes.input.textContent;
 
-    if (event.type === 'paste') {
-      url = (event.clipboardData || window.clipboardData).getData('text');
+    if (event.type === "paste") {
+      url = (event.clipboardData || window.clipboardData).getData("text");
     }
 
     this.removeErrorStyle();
@@ -303,15 +305,15 @@ export default class ButtonTool {
    * @returns {HTMLElement}
    */
   prepareLinkPreview() {
-    const holder = this.make('a', this.CSS.linkContent, {
-      target: '_blank',
-      rel: 'nofollow noindex noreferrer',
+    const holder = this.make("a", this.CSS.linkContent, {
+      target: "_blank",
+      rel: "nofollow noindex noreferrer",
     });
 
-    this.nodes.linkImage = this.make('div', this.CSS.linkImage);
-    this.nodes.linkTitle = this.make('div', this.CSS.linkTitle);
-    this.nodes.linkDescription = this.make('p', this.CSS.linkDescription);
-    this.nodes.linkText = this.make('span', this.CSS.linkText);
+    this.nodes.linkImage = this.make("div", this.CSS.linkImage);
+    this.nodes.linkTitle = this.make("div", this.CSS.linkTitle);
+    this.nodes.linkDescription = this.make("p", this.CSS.linkDescription);
+    this.nodes.linkText = this.make("span", this.CSS.linkText);
 
     return holder;
   }
@@ -325,7 +327,7 @@ export default class ButtonTool {
     this.nodes.container.appendChild(this.nodes.linkContent);
 
     if (image && image.url) {
-      this.nodes.linkImage.style.backgroundImage = 'url(' + image.url + ')';
+      this.nodes.linkImage.style.backgroundImage = "url(" + image.url + ")";
       this.nodes.linkContent.appendChild(this.nodes.linkImage);
     }
 
@@ -340,7 +342,7 @@ export default class ButtonTool {
     }
 
     this.nodes.linkContent.classList.add(this.CSS.linkContentRendered);
-    this.nodes.linkContent.setAttribute('href', this.data.link);
+    this.nodes.linkContent.setAttribute("href", this.data.link);
     this.nodes.linkContent.appendChild(this.nodes.linkText);
 
     try {
@@ -423,7 +425,7 @@ export default class ButtonTool {
     };
 
     if (!metaData) {
-      this.fetchingFailed(this.api.i18n.t('Wrong response format from the server'));
+      this.fetchingFailed(this.api.i18n.t("Wrong response format from the server"));
 
       return;
     }
@@ -444,7 +446,7 @@ export default class ButtonTool {
   fetchingFailed(errorMessage) {
     this.api.notifier.show({
       message: errorMessage,
-      style: 'error',
+      style: "error",
     });
 
     this.applyErrorStyle();
