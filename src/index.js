@@ -15,7 +15,7 @@
 
 // eslint-disable-next-line
 import css from "./index.css";
-import ToolboxIcon from "./svg/toolbox.png";
+import ToolboxIcon from "./svg/toolbox.svg";
 import ajax from "@codexteam/ajax";
 // eslint-disable-next-line
 import polyfill from "url-polyfill";
