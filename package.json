@@ -18,7 +18,6 @@
   "scripts": {
     "build": "webpack --mode production",
     "build:dev": "webpack --mode development --watch",
-    "prepare": "yarn build",
     "prepublish": "npm run build"
   },
   "author": "CodeX <team@codex.so>",
