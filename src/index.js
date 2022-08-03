@@ -142,6 +142,9 @@ class Button {
       input: this.api.styles.input,
       button: "cdx-button__btn",
       caption: "cdx-quote__caption",
+      renderedWrapper: "cdx-button__rendered-wrapper",
+      renderedHref: "cdx-button__href-generated",
+      renderedCaption: "ccdx-button__caption-generated",
       settingsWrapper: "cdx-quote-settings",
       settingsButton: this.api.styles.settingsButton,
       settingsButtonActive: this.api.styles.settingsButtonActive,
@@ -212,17 +215,17 @@ class Button {
       innerHTML: this.btnText,
     });
 
-    const generatedField = this._make("div", [this.CSS.input, this.CSS.caption], {
+    const generatedField = this._make("div", [this.CSS.renderedWrapper], {
       contentEditable: false,
       innerHTML: this.data.caption,
     });
 
-    const h1 = this._make("h1", [this.CSS.caption], {
-      innerHTML: "h1",
+    const hrefTag = this._make("div", [this.CSS.renderedHref], {
+      contentEditable: false,
     });
 
-    const parapgraph = this._make("p", [this.CSS.caption], {
-      innerHTML: "o",
+    const captionTag = this._make("div", [this.CSS.renderedCaption], {
+      contentEditable: false,
     });
 
     generateBtn.addEventListener("click", () => {
@@ -230,16 +233,15 @@ class Button {
       const linkData = caption.textContent;
       this.data = { ...this.data, link: linkData, caption: captionData };
 
-      h1.textContent = linkData;
-      parapgraph.textContent = captionData;
-      generatedField.appendChild(h1);
-      generatedField.appendChild(parapgraph);
+      hrefTag.textContent = linkData;
+      captionTag.textContent = captionData;
+      generatedField.appendChild(hrefTag);
+      generatedField.appendChild(captionTag);
 
       container.removeChild(link);
       container.removeChild(caption);
       container.removeChild(generateBtn);
       container.appendChild(generatedField);
-      console.log("all good");
 
       return container;
     });
