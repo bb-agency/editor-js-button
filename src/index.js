@@ -208,9 +208,8 @@ class Button {
       innerHTML: this.data.caption,
     });
 
-    const generateBtn = this._make("button", [this.CSS.button], {
+    const generateBtn = this._make("div", [this.CSS.button], {
       innerHTML: this.btnText,
-      onClick: () => alert("Its working"),
     });
 
     generateBtn.addEventListener("click", () => {
