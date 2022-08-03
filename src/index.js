@@ -201,11 +201,11 @@ class Quote {
    */
   render() {
     const container = this._make("blockquote", [this.CSS.baseClass, this.CSS.wrapper]);
-    const quote = this._make("div", [this.CSS.input, this.CSS.text], {
+    const quote = this._make("div", [this.CSS.input, this.CSS.link], {
       contentEditable: !this.readOnly,
       innerHTML: this.data.text,
     });
-    const caption = this._make("div", [this.CSS.input, this.CSS.caption], {
+    const caption = this._make("div", [this.CSS.input, this.CSS.link], {
       contentEditable: !this.readOnly,
       innerHTML: this.data.caption,
     });
@@ -230,7 +230,6 @@ class Quote {
     generateBtn.addEventListener("click", () => {
       const captionData = caption.textContent;
       const href = quote.textContent;
-      // this.data = { ...this.data, link: href, caption: captionData };
 
       hrefTag.textContent = href;
       captionTag.textContent = captionData;
@@ -253,6 +252,7 @@ class Quote {
 
     container.appendChild(quote);
     container.appendChild(caption);
+    container.appendChild(generateBtn);
 
     return container;
   }
