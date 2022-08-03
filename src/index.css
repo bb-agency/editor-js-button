@@ -20,6 +20,7 @@
   color: #fff;
   background-color: black;
   margin-top: 10px;
+  max-width: 160px;
 }
 
 .cdx-quote [contentEditable="true"][data-placeholder]::before {
