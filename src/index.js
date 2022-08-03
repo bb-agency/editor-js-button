@@ -201,11 +201,11 @@ class Quote {
    */
   render() {
     const container = this._make("blockquote", [this.CSS.baseClass, this.CSS.wrapper]);
-    const quote = this._make("div", [this.CSS.input, this.CSS.text], {
+    const quote = this._make("div", [this.CSS.input, this.CSS.link], {
       contentEditable: !this.readOnly,
       innerHTML: this.data.text,
     });
-    const caption = this._make("div", [this.CSS.input, this.CSS.caption], {
+    const caption = this._make("div", [this.CSS.input, this.CSS.link], {
       contentEditable: !this.readOnly,
       innerHTML: this.data.caption,
     });
