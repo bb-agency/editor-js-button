@@ -189,7 +189,7 @@ class Quote {
     this.btnText = "Generate Button";
 
     this.data = {
-      text: data.text || "",
+      href: data.text || "",
       caption: data.caption || "",
       alignment: (Object.values(ALIGNMENTS).includes(data.alignment) && data.alignment) || config.defaultAlignment || DEFAULT_ALIGNMENT,
     };
@@ -204,7 +204,7 @@ class Quote {
     const container = this._make("blockquote", [this.CSS.baseClass, this.CSS.wrapper]);
     const quote = this._make("div", [this.CSS.input, this.CSS.text], {
       contentEditable: !this.readOnly,
-      innerHTML: this.data.text,
+      innerHTML: this.data.href,
     });
     const caption = this._make("div", [this.CSS.input, this.CSS.caption], {
       contentEditable: !this.readOnly,
@@ -268,7 +268,7 @@ class Quote {
     const caption = quoteElement.querySelector(`.${this.CSS.caption}`);
 
     return Object.assign(this.data, {
-      text: text.innerHTML,
+      href: text.innerHTML,
       caption: caption.innerHTML,
     });
   }
@@ -278,7 +278,7 @@ class Quote {
    */
   static get sanitize() {
     return {
-      text: {
+      href: {
         br: true,
       },
       caption: {
