@@ -222,12 +222,12 @@ class Button {
       const linkData = caption.textContent;
       this.data = { ...this.data, link: linkData, caption: captionData };
 
-      console.log("this.data :>> ", this.data);
+      generatedField.textContent = linkData + "\r\n";
+      generatedField.textContent += captionData + "\r\n";
 
       container.removeChild(link);
-      console.log("link");
       container.removeChild(caption);
-      console.log("caption");
+      container.removeChild(generateBtn);
       container.appendChild(generatedField);
       console.log("all good");
 
