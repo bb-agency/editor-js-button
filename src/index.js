@@ -231,7 +231,7 @@ class Button {
     generateBtn.addEventListener("click", () => {
       const captionData = caption.textContent;
       const href = link.textContent;
-      this.data = { ...this.data, link: linkData, caption: captionData };
+      this.data = { ...this.data, link: href, caption: captionData };
 
       hrefTag.textContent = href;
       captionTag.textContent = captionData;
