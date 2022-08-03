@@ -218,16 +218,18 @@ class Button {
     });
 
     generateBtn.addEventListener("click", () => {
-      console.log("clicked");
       const captionData = caption.textContent;
       const linkData = caption.textContent;
-      this.data = { link: linkData, caption: captionData };
+      this.data = { ...this.data, link: linkData, caption: captionData };
 
       console.log("this.data :>> ", this.data);
 
       container.removeChild(link);
+      console.log("link");
       container.removeChild(caption);
+      console.log("caption");
       container.appendChild(generatedField);
+      console.log("all good");
 
       return container;
     });
