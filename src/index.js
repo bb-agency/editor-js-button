@@ -199,7 +199,7 @@ class Button {
    */
   render() {
     const container = this._make("blockquote", [this.CSS.baseClass, this.CSS.wrapper]);
-    const quote = this._make("div", [this.CSS.input, this.CSS.link], {
+    const link = this._make("div", [this.CSS.input, this.CSS.link], {
       contentEditable: !this.readOnly,
       innerHTML: this.data.link,
     });
@@ -217,20 +217,25 @@ class Button {
       innerHTML: this.data.caption,
     });
 
-    console.log("this.data :>> ", this.data);
-
     generateBtn.addEventListener("click", () => {
       console.log("clicked");
+      const captionData = caption.textContent;
+      const linkData = caption.textContent;
+      this.data = { link: linkData, caption: captionData };
 
-      container.append(generatedField);
+      console.log("this.data :>> ", this.data);
+
+      container.removeChild(link);
+      container.removeChild(caption);
+      container.appendChild(generatedField);
 
       return container;
     });
 
-    quote.dataset.placeholder = this.quotePlaceholder;
+    link.dataset.placeholder = this.quotePlaceholder;
     caption.dataset.placeholder = this.captionPlaceholder;
 
-    container.appendChild(quote);
+    container.appendChild(link);
     container.appendChild(caption);
     container.appendChild(generateBtn);
 
