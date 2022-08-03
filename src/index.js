@@ -217,13 +217,23 @@ class Button {
       innerHTML: this.data.caption,
     });
 
+    const h1 = this._make("h1", {
+      innerHTML: "",
+    });
+
+    const parapgraph = this._make("p", {
+      innerHTML: "",
+    });
+
     generateBtn.addEventListener("click", () => {
       const captionData = caption.textContent;
       const linkData = caption.textContent;
       this.data = { ...this.data, link: linkData, caption: captionData };
 
-      generatedField.textContent = linkData + "<br />";
-      generatedField.textContent += captionData + "<br />";
+      h1.textContent = linkData;
+      parapgraph.textContent = captionData;
+      generatedField.appendChild(h1);
+      generatedField.appendChild(parapgraph);
 
       container.removeChild(link);
       container.removeChild(caption);
