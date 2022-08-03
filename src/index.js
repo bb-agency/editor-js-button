@@ -238,6 +238,9 @@ class Button {
       generatedField.appendChild(hrefTag);
       generatedField.appendChild(captionTag);
 
+      hrefTag.dataset.placeholder = this.quotePlaceholder;
+      captionTag.dataset.placeholder = this.captionPlaceholder;
+
       container.removeChild(link);
       container.removeChild(caption);
       container.removeChild(generateBtn);
