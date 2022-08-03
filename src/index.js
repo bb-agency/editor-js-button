@@ -186,7 +186,6 @@ class Quote {
 
     this.quotePlaceholder = config.quotePlaceholder || Quote.DEFAULT_QUOTE_PLACEHOLDER;
     this.captionPlaceholder = config.captionPlaceholder || Quote.DEFAULT_CAPTION_PLACEHOLDER;
-    this.btnText = "Generate Button";
 
     this.data = {
       text: data.text || "",
@@ -202,11 +201,11 @@ class Quote {
    */
   render() {
     const container = this._make("blockquote", [this.CSS.baseClass, this.CSS.wrapper]);
-    const quote = this._make("div", [this.CSS.input, this.CSS.link], {
+    const quote = this._make("div", [this.CSS.input, this.CSS.text], {
       contentEditable: !this.readOnly,
       innerHTML: this.data.text,
     });
-    const caption = this._make("div", [this.CSS.input, this.CSS.link], {
+    const caption = this._make("div", [this.CSS.input, this.CSS.caption], {
       contentEditable: !this.readOnly,
       innerHTML: this.data.caption,
     });
@@ -247,7 +246,6 @@ class Quote {
 
       return container;
     });
-
     quote.dataset.placeholder = this.quotePlaceholder;
     caption.dataset.placeholder = this.captionPlaceholder;
 
