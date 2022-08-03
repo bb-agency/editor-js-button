@@ -218,11 +218,11 @@ class Button {
     });
 
     const h1 = this._make("h1", {
-      innerHTML: "",
+      innerHTML: "h1",
     });
 
     const parapgraph = this._make("p", {
-      innerHTML: "",
+      innerHTML: "o",
     });
 
     generateBtn.addEventListener("click", () => {
