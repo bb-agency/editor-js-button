@@ -140,6 +140,7 @@ class Button {
       wrapper: "cdx-quote",
       link: "cdx-quote__link",
       input: this.api.styles.input,
+      button: "cdx-button__btn",
       caption: "cdx-quote__caption",
       settingsWrapper: "cdx-quote-settings",
       settingsButton: this.api.styles.settingsButton,
@@ -182,6 +183,7 @@ class Button {
 
     this.quotePlaceholder = config.quotePlaceholder || Button.DEFAULT_QUOTE_PLACEHOLDER;
     this.captionPlaceholder = config.captionPlaceholder || Button.DEFAULT_CAPTION_PLACEHOLDER;
+    this.btnText = "Generate Button";
 
     this.data = {
       link: data.link || "",
@@ -206,11 +208,16 @@ class Button {
       innerHTML: this.data.caption,
     });
 
+    const generateBtn = this._make("button", [this.CSS.button], {
+      innerHTML: this.btnText,
+    });
+
     quote.dataset.placeholder = this.quotePlaceholder;
     caption.dataset.placeholder = this.captionPlaceholder;
 
     container.appendChild(quote);
     container.appendChild(caption);
+    container.appendChild(generateBtn);
 
     return container;
   }

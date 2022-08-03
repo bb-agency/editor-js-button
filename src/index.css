@@ -14,6 +14,13 @@
 .cdx-quote__link {
 }
 
+.cdx-button__btn {
+  border-radius: 10px;
+  padding: 10px 20px;
+  color: black;
+  border: 1px solid gray;
+}
+
 .cdx-quote [contentEditable="true"][data-placeholder]::before {
   position: absolute;
   content: attr(data-placeholder);
