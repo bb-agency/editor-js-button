@@ -14,7 +14,8 @@
   "main": "./dist/bundle.js",
   "scripts": {
     "build": "webpack --mode production",
-    "build:dev": "webpack --mode development --watch"
+    "build:dev": "webpack --mode development --watch",
+    "prepare": "npm run build"
   },
   "author": {
     "name": "CodeX",
