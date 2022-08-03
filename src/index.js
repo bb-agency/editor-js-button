@@ -244,6 +244,7 @@ class Button {
       // container.removeChild(link);
       // container.removeChild(caption);
       generateBtn.style.display = "none";
+      caption.style.display = "none";
       container.appendChild(generatedField);
 
       return container;
