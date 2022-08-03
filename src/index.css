@@ -17,8 +17,9 @@
 .cdx-button__btn {
   border-radius: 10px;
   padding: 10px 20px;
-  color: black;
-  border: 1px solid gray;
+  color: #fff;
+  background-color: black;
+  margin-top: 10px;
 }
 
 .cdx-quote [contentEditable="true"][data-placeholder]::before {
