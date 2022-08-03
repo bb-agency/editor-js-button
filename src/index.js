@@ -213,7 +213,9 @@ class Button {
       onClick: () => alert("Its working"),
     });
 
-    console.log("generateBtn :>> ", generateBtn);
+    generateBtn.addEventListener("click", () => {
+      console.log("clicked");
+    });
 
     quote.dataset.placeholder = this.quotePlaceholder;
     caption.dataset.placeholder = this.captionPlaceholder;
