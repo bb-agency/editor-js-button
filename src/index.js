@@ -186,6 +186,7 @@ class Quote {
 
     this.quotePlaceholder = config.quotePlaceholder || Quote.DEFAULT_QUOTE_PLACEHOLDER;
     this.captionPlaceholder = config.captionPlaceholder || Quote.DEFAULT_CAPTION_PLACEHOLDER;
+    this.btnText = "Generate Button";
 
     this.data = {
       text: data.text || "",
@@ -241,7 +242,7 @@ class Quote {
 
       generateBtn.style.display = "none";
       caption.style.display = "none";
-      caption.style.display = "none";
+      quote.style.display = "none";
       container.appendChild(generatedField);
 
       return container;
