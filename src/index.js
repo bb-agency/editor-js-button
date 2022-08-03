@@ -222,8 +222,8 @@ class Button {
       const linkData = caption.textContent;
       this.data = { ...this.data, link: linkData, caption: captionData };
 
-      generatedField.textContent = linkData + "\r\n";
-      generatedField.textContent += captionData + "\r\n";
+      generatedField.textContent = linkData + "<br />";
+      generatedField.textContent += captionData + "<br />";
 
       container.removeChild(link);
       container.removeChild(caption);
