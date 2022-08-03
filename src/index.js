@@ -203,7 +203,7 @@ class Button {
       contentEditable: !this.readOnly,
       innerHTML: this.data.link,
     });
-    const caption = this._make("div", [this.CSS.input, this.CSS.caption], {
+    const caption = this._make("div", [this.CSS.input, this.CSS.link], {
       contentEditable: !this.readOnly,
       innerHTML: this.data.caption,
     });
@@ -217,11 +217,11 @@ class Button {
       innerHTML: this.data.caption,
     });
 
-    const h1 = this._make("h1", {
+    const h1 = this._make("h1", [this.CSS.caption], {
       innerHTML: "h1",
     });
 
-    const parapgraph = this._make("p", {
+    const parapgraph = this._make("p", [this.CSS.caption], {
       innerHTML: "o",
     });
 
