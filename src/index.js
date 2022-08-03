@@ -212,8 +212,19 @@ class Button {
       innerHTML: this.btnText,
     });
 
+    const generatedField = this._make("div", [this.CSS.input, this.CSS.caption], {
+      contentEditable: false,
+      innerHTML: this.data.caption,
+    });
+
+    console.log("this.data :>> ", this.data);
+
     generateBtn.addEventListener("click", () => {
       console.log("clicked");
+
+      container.append(generatedField);
+
+      return container;
     });
 
     quote.dataset.placeholder = this.quotePlaceholder;
