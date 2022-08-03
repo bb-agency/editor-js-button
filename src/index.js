@@ -212,6 +212,8 @@ class Button {
       innerHTML: this.btnText,
     });
 
+    console.log("generateBtn :>> ", generateBtn);
+
     quote.dataset.placeholder = this.quotePlaceholder;
     caption.dataset.placeholder = this.captionPlaceholder;
 
