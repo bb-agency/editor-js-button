@@ -1,16 +1,10 @@
 ![](https://badgen.net/badge/Editor.js/v2.0/blue)
 
-# Link Tool
+# Quote Tool
 
-Link Block for the [Editor.js](https://codex.so/editor).
+Provides Quote Blocks for the [Editor.js](https://editorjs.io).
 
-![](assets/gif/demo.gif)
-
-## Features
-
-Allows adding link previews to your articles.
-
-**Note:** this Tool requires server-side implementation for link data fetching. See [backend response format](#server-format) for more details.
+![](https://capella.pics/017dca46-6869-40cb-93a0-994416576e33.jpg)
 
 ## Installation
 
@@ -19,121 +13,101 @@ Allows adding link previews to your articles.
 Get the package
 
 ```shell
-npm i --save-dev @editorjs/link
+npm i --save-dev @editorjs/quote
 ```
 
 Include module at your application
 
 ```javascript
-const LinkTool = require('@editorjs/link');
+const Quote = require('@editorjs/quote');
 ```
 
 ### Download to your project's source dir
 
-1. Download folder `dist` from repository
+1. Upload folder `dist` from repository
 2. Add `dist/bundle.js` file to your page.
 
 ### Load from CDN
 
-You can load the specific version of a package from [jsDelivr CDN](https://www.jsdelivr.com/package/npm/@editorjs/link).
+You can load specific version of package from [jsDelivr CDN](https://www.jsdelivr.com/package/npm/@editorjs/quote).
 
-`https://cdn.jsdelivr.net/npm/@editorjs/link@2.0.0`
+`https://cdn.jsdelivr.net/npm/@editorjs/quote@latest`
 
-Then require this script on page with Editor.js through the `<script src=""></script>` tag.
+Then require this script on page with Editor.js.
+
+```html
+<script src="..."></script>
+```
 
 ## Usage
 
 Add a new Tool to the `tools` property of the Editor.js initial config.
 
 ```javascript
-const editor = EditorJS({
+var editor = EditorJS({
   ...
-
+  
   tools: {
     ...
-    linkTool: {
-      class: LinkTool,
-      config: {
-        endpoint: 'http://localhost:8008/fetchUrl', // Your backend endpoint for url data fetching,
-      }
-    }
+    quote: Quote,
   },
+  
+  ...
+});
+```
 
+Or init Quote Tool with additional settings
+
+```javascript
+var editor = EditorJS({
+  ...
+  
+  tools: {
+    ...
+    quote: {
+      class: Quote,
+      inlineToolbar: true,
+      shortcut: 'CMD+SHIFT+O',
+      config: {
+        quotePlaceholder: 'Enter a quote',
+        captionPlaceholder: 'Quote\'s author',
+      },
+    },
+  },
+  
   ...
 });
 ```
 
 ## Config Params
 
-Link Tool supports these configuration parameters:
+| Field              | Type     | Description                 |
+| ------------------ | -------- | ----------------------------|
+| quotePlaceholder   | `string` | quote's placeholder string  |
+| captionPlaceholder | `string` | caption's placeholder string|
 
-| Field    | Type        | Description                                    |
-| ---------|-------------|------------------------------------------------|
-| endpoint | `string`    | **Required:** the endpoint for link data fetching. |
-| headers | `object`    | **Optional:** the headers used in the GET request. |
+## Tool's settings
+
+![](https://capella.pics/0db5d4de-c431-4cc2-90bf-bb1f4feec5df.jpg)
+
+You can choose alignment for the quote. It takes no effect while editing, but saved the «alignment» param.
 
 ## Output data
 
-This Tool returns `data` with following format
+| Field     | Type     | Description          |
+| --------- | -------- | -------------------- |
+| text      | `string` | quote's text         |
+| caption   | `string` | caption or an author |
+| alignment | `string` | `left` or `center`   |
 
-| Field          | Type      | Description                     |
-| -------------- | --------- | ------------------------------- |
-| link           | `string`  | Pasted link's url               |
-| meta           | `object`  | Fetched link's data. Any data got from the backend. Currently, the plugin's design supports the 'title', 'image', and 'description' fields. |
 
 ```json
 {
-    "type" : "linkTool",
+    "type" : "quote",
     "data" : {
-        "link" : "https://codex.so",
-        "meta" : {
-            "title" : "CodeX Team",
-            "site_name" : "CodeX",
-            "description" : "Club of web-development, design and marketing. We build team learning how to build full-valued projects on the world market.",
-            "image" : {
-                "url" : "https://codex.so/public/app/img/meta_img.png"
-            }
-        }
+        "text" : "The unexamined life is not worth living.",
+        "caption" : "Socrates",
+        "alignment" : "left"
     }
 }
 ```
-
-## Backend response format <a name="server-format"></a>
-
-You can implement a backend for link data fetching your own way. It is a specific and trivial task depending on your
-environment and stack.
-
-Backend response **should** cover following format:
-
-```json5
-{
-    "success" : 1,
-    "link": "https://codex.so", // Optionally return a link to set the hyperlink URL
-    "meta": {
-        // ... any fields you want
-    }
-}
-```
-
-**success** — uploading status. 1 for successful, 0 for failed
-
-**link** - Optional response parameter to override the URL provided
-
-**meta** — link fetched data.
-
-Currently, the plugin's design supports the 'title', 'image', and 'description' fields. They should have the following format in the response:
-
-```json5
-{
-    "success" : 1,
-    "meta": {
-        "title" : "CodeX Team",
-        "description" : "Club of web-development, design and marketing. We build team learning how to build full-valued projects on the world market.",
-        "image" : {
-            "url" : "https://codex.so/public/app/img/meta_img.png"
-        }
-    }
-}
-```
-
-Also, it can contain any additional fields you want to store.

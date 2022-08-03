@@ -1,38 +1,33 @@
-const path = require("path");
-
 module.exports = {
+  entry: './src/index.js',
   module: {
     rules: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: ["babel-loader", "eslint-loader?fix=true"],
+        use: [
+          {
+            loader: 'babel-loader',
+            query: {
+              presets: [ '@babel/preset-env' ],
+            },
+          },
+        ]
       },
       {
         test: /\.css$/,
         use: [
-          "style-loader",
-          "css-loader",
-          {
-            loader: "postcss-loader",
-            options: {
-              plugins: [require("postcss-nested-ancestors"), require("postcss-nested")],
-            },
-          },
-        ],
-      },
-      {
-        test: /\.svg$/,
-        loader: "svg-inline-loader?removeSVGTagAttrs=false",
-      },
-    ],
+          'style-loader',
+          'css-loader'
+        ]
+      }
+    ]
   },
   output: {
-    path: path.join(__dirname, "/dist"),
-    publicPath: "/",
-    filename: "bundle.js",
-    library: "ButtonTool",
-    libraryExport: "default",
-    libraryTarget: "umd",
-  },
+    path: __dirname + '/dist',
+    publicPath: '/',
+    filename: 'bundle.js',
+    library: 'Quote',
+    libraryTarget: 'umd'
+  }
 };
