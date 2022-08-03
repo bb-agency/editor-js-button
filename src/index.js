@@ -138,9 +138,9 @@ class Button {
     return {
       baseClass: this.api.styles.block,
       wrapper: "cdx-quote",
-      link: "cdx-quote__text",
+      link: "cdx-quote__caption",
       input: this.api.styles.input,
-      caption: "cdx-quote__caption",
+      caption: "cdx-quote__text",
       settingsWrapper: "cdx-quote-settings",
       settingsButton: this.api.styles.settingsButton,
       settingsButtonActive: this.api.styles.settingsButtonActive,
