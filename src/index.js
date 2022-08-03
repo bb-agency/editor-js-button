@@ -11,17 +11,17 @@ require("./index.css").toString();
  *
  * @typedef {object} QuoteData
  * @description Quote Tool`s input and output data
- * @property {string} link - quote`s link
+ * @property {string} text - quote`s text
  * @property {string} caption - quote`s caption
  * @property {'center'|'left'} alignment - quote`s alignment
  *
  * @typedef {object} QuoteConfig
  * @description Quote Tool`s initial configuration
- * @property {string} quotePlaceholder - placeholder to show in quote`s link input
+ * @property {string} quotePlaceholder - placeholder to show in quote`s text input
  * @property {string} captionPlaceholder - placeholder to show in quote`s caption input
  * @property {'center'|'left'} defaultAlignment - alignment to use as default
  */
-class Button {
+class Quote {
   /**
    * Notify core that read-only mode is supported
    *
@@ -41,7 +41,7 @@ class Button {
   static get toolbox() {
     return {
       icon: '<svg width="15" height="14" viewBox="0 0 15 14" xmlns="http://www.w3.org/2000/svg"><path d="M13.53 6.185l.027.025a1.109 1.109 0 0 1 0 1.568l-5.644 5.644a1.109 1.109 0 1 1-1.569-1.568l4.838-4.837L6.396 2.23A1.125 1.125 0 1 1 7.986.64l5.52 5.518.025.027zm-5.815 0l.026.025a1.109 1.109 0 0 1 0 1.568l-5.644 5.644a1.109 1.109 0 1 1-1.568-1.568l4.837-4.837L.58 2.23A1.125 1.125 0 0 1 2.171.64L7.69 6.158l.025.027z" /></svg>',
-      title: "Button",
+      title: "Quote",
     };
   }
 
@@ -66,13 +66,13 @@ class Button {
   }
 
   /**
-   * Default placeholder for quote link
+   * Default placeholder for quote text
    *
    * @public
    * @returns {string}
    */
   static get DEFAULT_QUOTE_PLACEHOLDER() {
-    return "Enter a link";
+    return "Enter a quote";
   }
 
   /**
@@ -105,7 +105,7 @@ class Button {
    * @returns {string}
    */
   static get DEFAULT_ALIGNMENT() {
-    return Button.ALIGNMENTS.left;
+    return Quote.ALIGNMENTS.left;
   }
 
   /**
@@ -116,7 +116,7 @@ class Button {
       /**
        * To create Quote data from string, simple fill 'text' property
        */
-      import: "link",
+      import: "text",
       /**
        * To create string from Quote data, concatenate text and caption
        *
@@ -124,7 +124,7 @@ class Button {
        * @returns {string}
        */
       export: function (quoteData) {
-        return quoteData.caption ? `${quoteData.link} — ${quoteData.caption}` : quoteData.link;
+        return quoteData.caption ? `${quoteData.text} — ${quoteData.caption}` : quoteData.text;
       },
     };
   }
@@ -132,7 +132,7 @@ class Button {
   /**
    * Tool`s styles
    *
-   * @returns {{baseClass: string, wrapper: string, quote: string, input: string, caption: string, settingsButton: string, settingsButtonActive: string, button: string}}
+   * @returns {{baseClass: string, wrapper: string, quote: string, input: string, caption: string, settingsButton: string, settingsButtonActive: string}}
    */
   get CSS() {
     return {
@@ -179,17 +179,16 @@ class Button {
    *   readOnly - read-only mode flag
    */
   constructor({ data, config, api, readOnly }) {
-    const { ALIGNMENTS, DEFAULT_ALIGNMENT } = Button;
+    const { ALIGNMENTS, DEFAULT_ALIGNMENT } = Quote;
 
     this.api = api;
     this.readOnly = readOnly;
 
-    this.quotePlaceholder = config.quotePlaceholder || Button.DEFAULT_QUOTE_PLACEHOLDER;
-    this.captionPlaceholder = config.captionPlaceholder || Button.DEFAULT_CAPTION_PLACEHOLDER;
-    this.btnText = "Generate Button";
+    this.quotePlaceholder = config.quotePlaceholder || Quote.DEFAULT_QUOTE_PLACEHOLDER;
+    this.captionPlaceholder = config.captionPlaceholder || Quote.DEFAULT_CAPTION_PLACEHOLDER;
 
     this.data = {
-      link: data.link || "",
+      text: data.text || "",
       caption: data.caption || "",
       alignment: (Object.values(ALIGNMENTS).includes(data.alignment) && data.alignment) || config.defaultAlignment || DEFAULT_ALIGNMENT,
     };
@@ -202,11 +201,11 @@ class Button {
    */
   render() {
     const container = this._make("blockquote", [this.CSS.baseClass, this.CSS.wrapper]);
-    const link = this._make("div", [this.CSS.input, this.CSS.link], {
+    const quote = this._make("div", [this.CSS.input, this.CSS.text], {
       contentEditable: !this.readOnly,
-      innerHTML: this.data.link,
+      innerHTML: this.data.text,
     });
-    const caption = this._make("div", [this.CSS.input, this.CSS.link], {
+    const caption = this._make("div", [this.CSS.input, this.CSS.caption], {
       contentEditable: !this.readOnly,
       innerHTML: this.data.caption,
     });
@@ -230,8 +229,8 @@ class Button {
 
     generateBtn.addEventListener("click", () => {
       const captionData = caption.textContent;
-      const href = link.textContent;
-      this.data = { ...this.data, link: href, caption: captionData };
+      const href = quote.textContent;
+      // this.data = { ...this.data, link: href, caption: captionData };
 
       hrefTag.textContent = href;
       captionTag.textContent = captionData;
@@ -241,21 +240,19 @@ class Button {
       hrefTag.dataset.placeholder = this.quotePlaceholder;
       captionTag.dataset.placeholder = this.captionPlaceholder;
 
-      // container.removeChild(link);
-      // container.removeChild(caption);
       generateBtn.style.display = "none";
+      caption.style.display = "none";
       caption.style.display = "none";
       container.appendChild(generatedField);
 
       return container;
     });
 
-    link.dataset.placeholder = this.quotePlaceholder;
+    quote.dataset.placeholder = this.quotePlaceholder;
     caption.dataset.placeholder = this.captionPlaceholder;
 
-    container.appendChild(link);
+    container.appendChild(quote);
     container.appendChild(caption);
-    container.appendChild(generateBtn);
 
     return container;
   }
@@ -267,11 +264,11 @@ class Button {
    * @returns {QuoteData}
    */
   save(quoteElement) {
-    const link = quoteElement.querySelector(`.${this.CSS.link}`);
+    const text = quoteElement.querySelector(`.${this.CSS.text}`);
     const caption = quoteElement.querySelector(`.${this.CSS.caption}`);
 
     return Object.assign(this.data, {
-      link: link.innerHTML,
+      text: text.innerHTML,
       caption: caption.innerHTML,
     });
   }
@@ -281,7 +278,7 @@ class Button {
    */
   static get sanitize() {
     return {
-      link: {
+      text: {
         br: true,
       },
       caption: {
@@ -365,4 +362,4 @@ class Button {
   }
 }
 
-module.exports = Button;
+module.exports = Quote;
