@@ -210,6 +210,7 @@ class Button {
 
     const generateBtn = this._make("button", [this.CSS.button], {
       innerHTML: this.btnText,
+      onClick: () => alert("Its working"),
     });
 
     console.log("generateBtn :>> ", generateBtn);
