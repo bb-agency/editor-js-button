@@ -144,7 +144,7 @@ class Button {
       caption: "cdx-quote__caption",
       renderedWrapper: "cdx-button__rendered-wrapper",
       renderedHref: "cdx-button__href-generated",
-      renderedCaption: "ccdx-button__caption-generated",
+      renderedCaption: "cdx-button__caption-generated",
       settingsWrapper: "cdx-quote-settings",
       settingsButton: this.api.styles.settingsButton,
       settingsButtonActive: this.api.styles.settingsButtonActive,
