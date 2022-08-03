@@ -6,14 +6,15 @@
   margin: 0;
 }
 
-.cdx-quote__text {
+.cdx-quote__caption {
   min-height: 158px;
-  margin-bottom: 10px;
+  margin-top: 10px;
 }
 
-.cdx-quote__caption {}
+.cdx-quote__link {
+}
 
-.cdx-quote [contentEditable=true][data-placeholder]::before{
+.cdx-quote [contentEditable="true"][data-placeholder]::before {
   position: absolute;
   content: attr(data-placeholder);
   color: #707684;
@@ -21,14 +22,13 @@
   opacity: 0;
 }
 
-.cdx-quote [contentEditable=true][data-placeholder]:empty::before {
+.cdx-quote [contentEditable="true"][data-placeholder]:empty::before {
   opacity: 1;
 }
 
-.cdx-quote [contentEditable=true][data-placeholder]:empty:focus::before {
+.cdx-quote [contentEditable="true"][data-placeholder]:empty:focus::before {
   opacity: 0;
 }
-
 
 .cdx-quote-settings {
   display: flex;
