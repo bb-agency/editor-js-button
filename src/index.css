@@ -11,18 +11,19 @@
   margin-top: 10px;
 }
 
-.cdx-quote__link {
+.cdx-quote__link:last-child {
+  margin-top: 10px;
 }
 
 .cdx-button__href-generated {
   font-size: 17px;
   font-weight: 600;
   line-height: 1.5em;
-  margin: 0 0 10px 0;
+  margin-right: 15px;
 }
 
 .cdx-button__caption-generated {
-  margin: 0 0 20px 0;
+  margin: 0 0 20px 15px;
   font-size: 15px;
   line-height: 1.55em;
   display: -webkit-box;
@@ -38,6 +39,8 @@
   border-radius: 6px;
   will-change: filter;
   animation: link-in 450ms 1 cubic-bezier(0.215, 0.61, 0.355, 1);
+  max-width: calc(100% - 50px);
+  margin: 0 auto;
 }
 
 .cdx-button__btn {

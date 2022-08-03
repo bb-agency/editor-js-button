@@ -230,10 +230,10 @@ class Button {
 
     generateBtn.addEventListener("click", () => {
       const captionData = caption.textContent;
-      const linkData = caption.textContent;
+      const href = link.textContent;
       this.data = { ...this.data, link: linkData, caption: captionData };
 
-      hrefTag.textContent = linkData;
+      hrefTag.textContent = href;
       captionTag.textContent = captionData;
       generatedField.appendChild(hrefTag);
       generatedField.appendChild(captionTag);
